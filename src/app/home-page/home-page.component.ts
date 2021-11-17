@@ -18,7 +18,8 @@ export class HomePageComponent implements OnInit {
   softwares$ = new Observable();
 
   ngOnInit(): void {
-    this.softwares$ = this.service.getAll();
+    this.service.addNewSoftware();
+    this.softwares$ = this.service.getAllSoftwares();
   }
 
   public getSantizeUrl(url: string) {

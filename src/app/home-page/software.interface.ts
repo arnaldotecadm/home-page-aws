@@ -1,9 +1,11 @@
 export class SoftwareInterface {
-  name: string;
-  nickname: string;
-  consideration: string;
-  brief: string;
-  urlApp: string;
-  inMaintenance: boolean;
-  image: File;
+  constructor(
+    readonly name,
+    readonly nickname,
+    readonly consideration,
+    readonly brief,
+    readonly urlApp,
+    readonly inMaintenance,
+    readonly image
+  ) {}
 }

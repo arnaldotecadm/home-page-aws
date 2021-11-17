@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "acb-home-page": {
+      "hosting": {
+        "home-page-aws": [
+          "acb-home-page"
+        ]
+      }
+    }
+  }
+}
