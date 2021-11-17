@@ -18,7 +18,6 @@ export class HomePageComponent implements OnInit {
   softwares$ = new Observable();
 
   ngOnInit(): void {
-    this.service.addNewSoftware();
     this.softwares$ = this.service.getAllSoftwares();
   }
 
