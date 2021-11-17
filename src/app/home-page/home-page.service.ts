@@ -1,8 +1,12 @@
-import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from "@angular/fire/firestore";
 import { BehaviorSubject } from "rxjs";
 import { SoftwareInterface } from "./software.interface";
+
+const SOFTWARE_TABLE = "softwares";
 
 @Injectable({
   providedIn: "root",
@@ -10,30 +14,45 @@ import { SoftwareInterface } from "./software.interface";
 export class AplicativoService {
   constructor(private store: AngularFirestore) {}
 
-  public addNewSoftware() {
+  public addNewSoftwareFromProp(
+    name,
+    nickname,
+    consideration,
+    brief,
+    urlApp,
+    inMaintenance,
+    image
+  ) {
     const software = new SoftwareInterface(
-      "smart-student-web",
-      "smart-student-web",
-      "Sistema basico para controle de alunos e aulas de qualquer pequena escola",
-      "Facilite sua vida de lançar notas e calcular medias utilizando este simples app",
-      "http://www.google.com.br",
-      false,
-      null
+      name,
+      nickname,
+      consideration,
+      brief,
+      urlApp,
+      inMaintenance,
+      image
     );
 
-    this.store.collection("softwares").add(Object.assign({}, software));
+    this.saveSoftware(software);
   }
 
-  public getAllSoftwares(){
-    return this.getObservable(this.store.collection("softwares"));
+  public addNewSoftwareFromObj(software: SoftwareInterface) {
+    this.saveSoftware(software);
   }
 
-   getObservable = (collection: AngularFirestoreCollection<any>) => {
+  private saveSoftware(software: SoftwareInterface) {
+    this.store.collection(SOFTWARE_TABLE).add(Object.assign({}, software));
+  }
+
+  public getAllSoftwares() {
+    return this.getObservable(this.store.collection(SOFTWARE_TABLE));
+  }
+
+  getObservable = (collection: AngularFirestoreCollection<any>) => {
     const subject = new BehaviorSubject<any[]>([]);
     collection.valueChanges().subscribe((val: any[]) => {
       subject.next(val);
     });
     return subject;
   };
-  
 }
