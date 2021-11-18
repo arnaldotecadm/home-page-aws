@@ -10,13 +10,13 @@ const routes: Routes = [
   },
 
   {
-    path: "home",
+    path: "inicio",
     component: HomePageComponent,
   },
 
   {
     path: "**",
-    redirectTo: "home",
+    redirectTo: "inicio",
   },
 ];
 

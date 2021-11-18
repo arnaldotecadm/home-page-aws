@@ -42,8 +42,6 @@ export class UserService {
     localStorage.removeItem("isNewUser");
     this.userSubject.next(null);
     this.firebaseAuth.signOut();
-
-    this.router.navigate(["/sigin-in"]);
   }
 
   public isLogged() {

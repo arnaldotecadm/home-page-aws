@@ -23,7 +23,7 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
     if (this.userService.isLogged()) {
-      this.router.navigate(["home"]);
+      this.router.navigate(["inicio"]);
     } else {
       var config = {
         callbacks: {
@@ -62,7 +62,7 @@ export class SigninComponent implements OnInit {
       );
     });
     this.ngZone.run(() => {
-      this.router.navigate(["home"]);
+      this.router.navigate(["inicio"]);
     });
     return false;
   }
