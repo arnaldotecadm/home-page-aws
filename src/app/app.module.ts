@@ -7,6 +7,9 @@ import { environment } from "src/environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HomePageComponent } from "./home-page/home-page.component";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { SoftwareModule } from "./cadastros/software/software.module";
+import { CurrencyPipe, DecimalPipe } from "@angular/common";
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent],
@@ -16,8 +19,10 @@ import { HomePageComponent } from "./home-page/home-page.component";
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    BrowserAnimationsModule,
+    SoftwareModule,
   ],
-  providers: [],
+  providers: [DecimalPipe, CurrencyPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
