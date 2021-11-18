@@ -58,38 +58,29 @@
                       Software Indisponível no momento
                     </ul>
                     <ul class="list-inline">
-                      <li class="list-inline-item">
+                      <li class="list-inline-item" *ngIf="software.facebook">
                         <a
                           class="social-icon text-xs-center"
-                          target="_blank"
-                          href="#"
+                          [target]="software.facebook"
+                          [href]="software.facebook"
                         >
                           <i class="fa fa-facebook"></i>
                         </a>
                       </li>
-                      <li class="list-inline-item">
+                      <li class="list-inline-item" *ngIf="software.twitter">
                         <a
                           class="social-icon text-xs-center"
-                          target="_blank"
-                          href="#"
+                          [target]="software.twitter"
+                          [href]="software.twitter"
                         >
                           <i class="fa fa-twitter"></i>
                         </a>
                       </li>
-                      <li class="list-inline-item">
+                      <li class="list-inline-item" *ngIf="software.google">
                         <a
                           class="social-icon text-xs-center"
-                          target="_blank"
-                          href="#"
-                        >
-                          <i class="fa fa-skype"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a
-                          class="social-icon text-xs-center"
-                          target="_blank"
-                          href="#"
+                          [target]="software.google"
+                          [href]="software.google"
                         >
                           <i class="fa fa-google"></i>
                         </a>
