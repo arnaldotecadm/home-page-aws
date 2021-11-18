@@ -66,4 +66,8 @@ export class SigninComponent implements OnInit {
     });
     return false;
   }
+
+  goToHomePage(){
+    this.router.navigate(["inicio"]);
+  }
 }

@@ -12,7 +12,7 @@ import { UserService } from "./core/user/user.service";
 export class AppComponent {
   title = "home-page-aws";
 
-  constructor(private userService: UserService, private router : Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     firebase.default.initializeApp(environment.firebaseConfig);
@@ -26,7 +26,11 @@ export class AppComponent {
     return this.userService.isLogged();
   }
 
-  goHome(){
+  goHome() {
     this.router.navigate(["inicio"]);
+  }
+
+  goToSoftwares() {
+    this.router.navigate(["softwares"]);
   }
 }

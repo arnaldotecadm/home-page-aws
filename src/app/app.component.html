@@ -1,9 +1,9 @@
 <div class="container" *ngIf="isLoggedIn()">
-    <div class="row">
-        <div>Inicio</div>
-        <div>Lista Softwares</div>
-        <div (click)="logout()">Sair</div>
-    </div>
+  <div class="row">
+    <div (click)="goHome()">Inicio</div>
+    <div (click)="goToSoftwares()">Lista Softwares</div>
+    <div (click)="logout()">Sair</div>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
