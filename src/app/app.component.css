@@ -1,0 +1,9 @@
+.row > div {
+  color: black;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.row > div:hover {
+    color: blue;
+  }

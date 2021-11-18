@@ -1,1 +1,9 @@
+<div class="container" *ngIf="isLoggedIn()">
+    <div class="row">
+        <div>Inicio</div>
+        <div>Lista Softwares</div>
+        <div (click)="logout()">Sair</div>
+    </div>
+</div>
+
 <router-outlet></router-outlet>
