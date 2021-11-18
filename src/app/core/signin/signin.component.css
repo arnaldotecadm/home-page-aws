@@ -62,3 +62,13 @@
   display: block;
   margin-top: 10px;
 }
+
+.home-link {
+  text-align: center;
+  cursor: pointer;
+  text-decoration-line: underline;
+}
+
+.home-link:hover {
+  color: blue;
+}
