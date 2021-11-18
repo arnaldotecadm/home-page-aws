@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { AplicativoService } from "./home-page.service";
 import { Observable } from "rxjs";
 import { DomSanitizer } from "@angular/platform-browser";
-import { SoftwareInterface } from "./software.interface";
+import { SoftwareInterface } from "../services/software.interface";
+import { SoftwareService } from "../services/software.service";
 
 @Component({
   selector: "app-home-page",
@@ -11,7 +11,7 @@ import { SoftwareInterface } from "./software.interface";
 })
 export class HomePageComponent implements OnInit {
   constructor(
-    private service: AplicativoService,
+    private service: SoftwareService,
     private sanitizer: DomSanitizer
   ) {}
 

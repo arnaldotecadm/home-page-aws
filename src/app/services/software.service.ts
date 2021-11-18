@@ -11,7 +11,7 @@ const SOFTWARE_TABLE = "softwares";
 @Injectable({
   providedIn: "root",
 })
-export class AplicativoService {
+export class SoftwareService {
   constructor(private store: AngularFirestore) {}
 
   public addNewSoftwareFromProp(
