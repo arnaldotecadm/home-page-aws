@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import * as firebase from "firebase/app";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
+import { LoadingService } from "src/app/services/loading-service";
 import { TokenService } from "../token/token.service";
 import { UserService } from "../user/user.service";
 
@@ -18,10 +19,12 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private tokenService: TokenService,
     private ngZone: NgZone,
-    private userService: UserService
+    private userService: UserService,
+    private loadingService :LoadingService
   ) {}
 
   ngOnInit() {
+    this.loadingService.stop()
     if (this.userService.isLogged()) {
       this.router.navigate(["inicio"]);
     } else {
