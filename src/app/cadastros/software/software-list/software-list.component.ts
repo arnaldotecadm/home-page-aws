@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Subject } from "rxjs";
+import { LoadingService } from "src/app/services/loading-service";
 import { SoftwareService } from "src/app/services/software.service";
 
 @Component({
@@ -31,7 +32,7 @@ export class SoftwareListComponent implements OnInit, OnDestroy {
     { head: "Ações", el: "actions", botoes: this.botoes },
   ];
 
-  constructor(private router: Router, private service: SoftwareService) {}
+  constructor(private router: Router, private service: SoftwareService, private loadingService : LoadingService) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -48,6 +49,7 @@ export class SoftwareListComponent implements OnInit, OnDestroy {
           objList.push(item);
         });
         this.data$.next(objList);
+        this.loadingService.stop()
       });
   }
 
@@ -56,6 +58,7 @@ export class SoftwareListComponent implements OnInit, OnDestroy {
       return;
     }
     this.router.navigate(["software/" + $event.documentId]);
+    this.loadingService.start()
   }
 
   executarAcao(acaoPropagate) {
@@ -71,7 +74,8 @@ export class SoftwareListComponent implements OnInit, OnDestroy {
 
   excluirItem() {
     if(confirm("Deseja realmente excluir este registro?")) {
-      this.service.deleteById(this.itemSelecionado.documentId);
+      this.loadingService.start()
+      this.service.deleteById(this.itemSelecionado.documentId).then(() => this.loadingService.stop());
     }
   }
 

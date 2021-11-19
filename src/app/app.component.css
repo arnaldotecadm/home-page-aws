@@ -5,5 +5,21 @@
 }
 
 .row > div:hover {
-    color: blue;
-  }
+  color: blue;
+}
+
+.loading-icon {
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  top: 0px;
+  position: absolute !important;
+  background-color: #00000030;
+}
+
+.img-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
+}
