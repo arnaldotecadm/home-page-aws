@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import {
   AngularFirestore,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
 } from "@angular/fire/firestore";
 import { BehaviorSubject } from "rxjs";
 import { SoftwareInterface } from "./software.interface";
@@ -45,7 +45,29 @@ export class SoftwareService {
   }
 
   public getAllSoftwares() {
-    return this.getObservable(this.store.collection(SOFTWARE_TABLE));
+    return this.store.collection(SOFTWARE_TABLE).snapshotChanges();
+  }
+
+  public getById(identificacao) {
+    return this.store
+      .collection(SOFTWARE_TABLE)
+      .doc(identificacao)
+      .valueChanges();
+  }
+
+  public deleteById(identificacao) {
+    return this.store.collection(SOFTWARE_TABLE).doc(identificacao).delete();
+  }
+
+  public updateRegistro(identificacao, documento) {
+    return this.store
+      .collection(SOFTWARE_TABLE)
+      .doc(identificacao)
+      .set(documento);
+  }
+
+  public salvarRegistro(documento) {
+    return this.store.collection(SOFTWARE_TABLE).add(documento);
   }
 
   getObservable = (collection: AngularFirestoreCollection<any>) => {

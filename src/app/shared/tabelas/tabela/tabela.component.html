@@ -81,7 +81,6 @@
                           <div *ngIf="col.tipo && col.tipo == 'botao'">
                             <button
                               *ngFor="let acao of col.botoes"
-                              mat-button
                               [ngClass]="'btn btn-fill ' + acao.classe"
                               style="margin-right: 1%"
                               (click)="propagate(acao.acao, element)"

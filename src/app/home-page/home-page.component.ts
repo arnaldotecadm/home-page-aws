@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
+import { Subject } from "rxjs";
 import { SoftwareInterface } from "../services/software.interface";
 import { SoftwareService } from "../services/software.service";
 
@@ -9,16 +9,27 @@ import { SoftwareService } from "../services/software.service";
   templateUrl: "./home-page.component.html",
   styleUrls: ["./home-page.component.css"],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
   constructor(
     private service: SoftwareService,
     private sanitizer: DomSanitizer
   ) {}
 
-  softwares$ = new Observable();
+  softwares$ = new Subject();
+  subscription;
 
   ngOnInit(): void {
-    this.softwares$ = this.service.getAllSoftwares();
+    this.subscription = this.service
+      .getAllSoftwares()
+      .subscribe((data: any) => {
+        const objList = [];
+        data.forEach((doc) => {
+          let item = doc.payload.doc.data();
+          item.identificacao = doc.payload.doc.id;
+          objList.push(item);
+        });
+        this.softwares$.next(objList);
+      });
   }
 
   public getSantizeUrl(url: string) {
@@ -39,5 +50,9 @@ export class HomePageComponent implements OnInit {
     } else {
       window.open(software.urlApp, software.urlApp);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

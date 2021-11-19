@@ -1,0 +1,144 @@
+<div class="main-content mt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-10 offset-xl-1 col-lg-10 offset-lg-1 col-md-12">
+        <div class="card">
+          <div class="header">
+            <div class="row">
+              <div class="form-group col-md-10">
+                <h4 class="title">Informações Gerais</h4>
+              </div>
+
+              <div class="form-group col-md-2 d-flex flex-row-reverse">
+                <button
+                  (click)="voltar()"
+                  class="btn btn-info btn-fill col-md-12"
+                >
+                  Voltar
+                </button>
+                <button
+                  class="mr-1 btn btn-success btn-fill col-md-12"
+                  (click)="update()"
+                >
+                  Gravar
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <form [formGroup]="formulario" #formSoftware="ngForm">
+              <mat-accordion [multi]="true">
+                <mat-expansion-panel [expanded]="true">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title> Informações Principais </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Código</label>
+                        <input
+                          class="form-control"
+                          formControlName="documentId"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-10">
+                      <div class="form-group">
+                        <label>Nome</label>
+                        <input class="form-control" formControlName="name" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Nome Reduzido</label>
+                        <input
+                          class="form-control"
+                          formControlName="nickname"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Url de Acesso</label>
+                        <input class="form-control" formControlName="urlApp" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Resumo</label>
+                        <textarea
+                          class="form-control"
+                          formControlName="brief"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Descrição</label>
+                        <textarea
+                          class="form-control"
+                          formControlName="consideration"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Google</label>
+                        <input class="form-control" formControlName="google" />
+                      </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Facebook</label>
+                        <input
+                          class="form-control"
+                          formControlName="facebook"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Twitter</label>
+                        <input class="form-control" formControlName="twitter" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Manutenção</label>
+                        <mat-checkbox
+                          class="form-control"
+                          formControlName="inMaintenance"
+                          >Em Manutenção?</mat-checkbox
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </form>
+          </div>
+        </div>
+        <div class="col-xl-8 col-lg-7 col-md-12"></div>
+      </div>
+    </div>
+  </div>
+</div>
