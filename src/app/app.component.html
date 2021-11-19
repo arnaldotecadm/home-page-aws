@@ -7,3 +7,13 @@
 </div>
 
 <router-outlet></router-outlet>
+
+<ng-container *ngIf="loadingService.isLoading$ | async">
+  <div class="loading-icon" style="z-index: 1001">
+    <img
+      [src]="'/assets/img/loading-buffering.gif'"
+      alt="Loading Icon"
+      class="img-centered"
+    />
+  </div>
+</ng-container>

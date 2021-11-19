@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { Subject } from "rxjs";
+import { LoadingService } from "../services/loading-service";
 import { SoftwareInterface } from "../services/software.interface";
 import { SoftwareService } from "../services/software.service";
 
@@ -12,7 +13,8 @@ import { SoftwareService } from "../services/software.service";
 export class HomePageComponent implements OnInit, OnDestroy {
   constructor(
     private service: SoftwareService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private loadingService : LoadingService
   ) {}
 
   softwares$ = new Subject();
@@ -29,10 +31,14 @@ export class HomePageComponent implements OnInit, OnDestroy {
           objList.push(item);
         });
         this.softwares$.next(objList);
+        this.loadingService.stop();
       });
   }
 
   public getSantizeUrl(url: string) {
+    if (!url) {
+      return;
+    }
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 

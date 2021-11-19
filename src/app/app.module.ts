@@ -10,6 +10,7 @@ import { HomePageComponent } from "./home-page/home-page.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SoftwareModule } from "./cadastros/software/software.module";
 import { CurrencyPipe, DecimalPipe } from "@angular/common";
+import { LoadingService } from "./services/loading-service";
 
 @NgModule({
   declarations: [AppComponent, HomePageComponent],
@@ -22,7 +23,7 @@ import { CurrencyPipe, DecimalPipe } from "@angular/common";
     BrowserAnimationsModule,
     SoftwareModule,
   ],
-  providers: [DecimalPipe, CurrencyPipe],
+  providers: [DecimalPipe, CurrencyPipe,LoadingService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

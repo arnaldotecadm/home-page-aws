@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import * as firebase from "firebase/app";
 import { environment } from "../environments/environment";
 import { UserService } from "./core/user/user.service";
+import { LoadingService } from "./services/loading-service";
 
 @Component({
   selector: "app-root",
@@ -12,10 +13,15 @@ import { UserService } from "./core/user/user.service";
 export class AppComponent {
   title = "home-page-aws";
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    public loadingService: LoadingService
+  ) {}
 
   ngOnInit() {
     firebase.default.initializeApp(environment.firebaseConfig);
+    this.loadingService.start();
   }
 
   logout() {
@@ -28,9 +34,11 @@ export class AppComponent {
 
   goHome() {
     this.router.navigate(["inicio"]);
+    this.loadingService.start();
   }
 
   goToSoftwares() {
     this.router.navigate(["softwares"]);
+    this.loadingService.start();
   }
 }

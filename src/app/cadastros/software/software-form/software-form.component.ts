@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, NgForm } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
+import { LoadingService } from "src/app/services/loading-service";
 import { SoftwareService } from "src/app/services/software.service";
 
 @Component({
@@ -22,7 +23,8 @@ export class SoftwareFormComponent implements OnInit {
     private service: SoftwareService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private loadingService: LoadingService
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +43,7 @@ export class SoftwareFormComponent implements OnInit {
         this.formulario.patchValue(data);
         this.formulario.patchValue({ documentId: this.identifier });
       }
+      this.loadingService.stop();
     });
   }
 
@@ -57,6 +60,9 @@ export class SoftwareFormComponent implements OnInit {
     if (this.formulario.invalid) {
       return;
     }
+
+    this.loadingService.start();
+
     if (this.identifier != "0") {
       this.service
         .updateRegistro(this.identifier, this.formulario.getRawValue())
