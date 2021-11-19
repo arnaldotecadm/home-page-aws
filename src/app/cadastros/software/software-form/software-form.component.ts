@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, NgForm } from "@angular/forms";
+import { DomSanitizer } from "@angular/platform-browser";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { LoadingService } from "src/app/services/loading-service";
@@ -16,6 +17,7 @@ export class SoftwareFormComponent implements OnInit {
   identifier: string;
   obj$: Observable<any>;
   formulario: FormGroup;
+  imgContent;
 
   todasTurmas$: Observable<any>;
 
@@ -24,7 +26,8 @@ export class SoftwareFormComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private sanitizer: DomSanitizer,
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +45,9 @@ export class SoftwareFormComponent implements OnInit {
       if (data) {
         this.formulario.patchValue(data);
         this.formulario.patchValue({ documentId: this.identifier });
+        this.imgContent = this.getSantizeUrl(data.image)
       }
+      
       this.loadingService.stop();
     });
   }
@@ -104,5 +109,12 @@ export class SoftwareFormComponent implements OnInit {
       nickname: [],
       urlApp: [],
     });
+  }
+
+  public getSantizeUrl(url: string) {
+    if (!url) {
+      return;
+    }
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }
