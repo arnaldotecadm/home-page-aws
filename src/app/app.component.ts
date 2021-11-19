@@ -26,6 +26,7 @@ export class AppComponent {
 
   logout() {
     this.userService.logout();
+    this.router.navigate(["inicio"]);
   }
 
   isLoggedIn(): boolean {
@@ -39,6 +40,10 @@ export class AppComponent {
 
   goToSoftwares() {
     this.router.navigate(["softwares"]);
-    this.loadingService.start();
+    if (!this.userService.isLogged()) {
+      this.loadingService.start();
+    } else{
+      this.loadingService.stop()
+    }
   }
 }
