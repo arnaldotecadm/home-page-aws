@@ -33,9 +33,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   public getSantizeUrl(url: string) {
-    return this.sanitizer.bypassSecurityTrustUrl(
-      "data:image/png;base64, " + url
-    );
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
   public openLocation(software: SoftwareInterface) {

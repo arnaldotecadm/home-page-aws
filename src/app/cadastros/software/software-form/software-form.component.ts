@@ -9,13 +9,12 @@ import { SoftwareService } from "src/app/services/software.service";
   templateUrl: "./software-form.component.html",
   styleUrls: ["./software-form.component.css"],
 })
-export class SoftwareFormComponent implements OnInit, OnDestroy {
+export class SoftwareFormComponent implements OnInit {
   @ViewChild("formSoftware") ngForm: NgForm;
 
   identifier: string;
   obj$: Observable<any>;
   formulario: FormGroup;
-  subscription;
 
   todasTurmas$: Observable<any>;
 
@@ -29,10 +28,6 @@ export class SoftwareFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.construirFormulario();
     this.carregarDados();
-
-    this.subscription = this.router.events.subscribe(() => {
-      this.carregarDados();
-    });
   }
 
   get form(): NgForm {
@@ -66,16 +61,26 @@ export class SoftwareFormComponent implements OnInit, OnDestroy {
       this.service
         .updateRegistro(this.identifier, this.formulario.getRawValue())
         .then(() => {
-          this.carregarDados();
+          this.voltar();
         });
     } else {
       this.service
         .salvarRegistro(this.formulario.getRawValue())
         .then((data) => {
-          this.ngForm.resetForm();
-          this.router.navigate(["software/" + data.id]);
-          this.identifier = data.id;
+          this.voltar();
         });
+    }
+  }
+
+  inputFileChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      const imagem = event.target.files[0];
+
+      const reader = new FileReader();
+      reader.readAsDataURL(imagem);
+      reader.onload = () => {
+        this.formulario.patchValue({ image: reader.result });
+      };
     }
   }
 
@@ -85,17 +90,13 @@ export class SoftwareFormComponent implements OnInit, OnDestroy {
       brief: [],
       consideration: [],
       facebook: [],
-      google:[],
-      twitter:[],
+      google: [],
+      twitter: [],
       image: [],
       inMaintenance: [],
       name: [],
       nickname: [],
       urlApp: [],
     });
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 }
