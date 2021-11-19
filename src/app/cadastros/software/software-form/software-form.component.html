@@ -124,7 +124,24 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label>Imagem</label>
-                        <input class="form-control" type="file" (change)="inputFileChange($event)"/>
+                        <button
+                          class="mr-1 btn btn-success btn-fill col-md-12"
+                          (click)="img.click()"
+                        >
+                          Selecionar Imagem
+                        </button>
+                        <input
+                          #img
+                          class="form-control"
+                          type="file"
+                          (change)="inputFileChange($event)"
+                          hidden
+                        />
+                        <img
+                          (click)="img.click()"
+                          class="img-fluid"
+                          [src]="formulario.controls['image'].value"
+                        />
                       </div>
                     </div>
 
